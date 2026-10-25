@@ -1,0 +1,337 @@
+[
+ {
+  "file": "vito.jpg",
+  "group": "Pagina principală",
+  "label": "Duba Vito echipată"
+ },
+ {
+  "file": "fortador-pro-max.png",
+  "group": "Pagina principală",
+  "label": "Aparatul Fortador (fundal transparent, PNG)"
+ },
+ {
+  "file": "cinematic-murdar.jpg",
+  "group": "Pagina principală",
+  "label": "Animația cu abur: murdar"
+ },
+ {
+  "file": "cinematic-curat.jpg",
+  "group": "Pagina principală",
+  "label": "Animația cu abur: curat"
+ },
+ {
+  "file": "ba-scaune-inainte.jpg",
+  "group": "Înainte / după (pagina principală)",
+  "label": "Scaune textile: înainte"
+ },
+ {
+  "file": "ba-scaune-dupa.jpg",
+  "group": "Înainte / după (pagina principală)",
+  "label": "Scaune textile: după"
+ },
+ {
+  "file": "ba-mocheta-inainte.jpg",
+  "group": "Înainte / după (pagina principală)",
+  "label": "Mochetă: înainte"
+ },
+ {
+  "file": "ba-mocheta-dupa.jpg",
+  "group": "Înainte / după (pagina principală)",
+  "label": "Mochetă: după"
+ },
+ {
+  "file": "ba-motor-inainte.jpg",
+  "group": "Înainte / după (pagina principală)",
+  "label": "Motor: înainte"
+ },
+ {
+  "file": "ba-motor-dupa.jpg",
+  "group": "Înainte / după (pagina principală)",
+  "label": "Motor: după"
+ },
+ {
+  "file": "ba-plafon-inainte.jpg",
+  "group": "Înainte / după (pagina principală)",
+  "label": "Plafon: înainte"
+ },
+ {
+  "file": "ba-plafon-dupa.jpg",
+  "group": "Înainte / după (pagina principală)",
+  "label": "Plafon: după"
+ },
+ {
+  "file": "ba-piele-inainte.jpg",
+  "group": "Înainte / după (pagina principală)",
+  "label": "Piele: înainte"
+ },
+ {
+  "file": "ba-piele-dupa.jpg",
+  "group": "Înainte / după (pagina principală)",
+  "label": "Piele: după"
+ },
+ {
+  "file": "andy-popescu.jpg",
+  "group": "Pagina principală",
+  "label": "Andy Popescu: fundal"
+ },
+ {
+  "file": "andy-inainte.jpg",
+  "group": "Pagina principală",
+  "label": "Andy Popescu: înainte"
+ },
+ {
+  "file": "andy-dupa.jpg",
+  "group": "Pagina principală",
+  "label": "Andy Popescu: după"
+ },
+ {
+  "file": "luna-inainte.jpg",
+  "group": "Lucrarea lunii",
+  "label": "Înainte"
+ },
+ {
+  "file": "luna-dupa.jpg",
+  "group": "Lucrarea lunii",
+  "label": "După"
+ },
+ {
+  "file": "luna-1.jpg",
+  "group": "Lucrarea lunii",
+  "label": "Galerie, poza 1"
+ },
+ {
+  "file": "luna-2.jpg",
+  "group": "Lucrarea lunii",
+  "label": "Galerie, poza 2"
+ },
+ {
+  "file": "luna-3.jpg",
+  "group": "Lucrarea lunii",
+  "label": "Galerie, poza 3"
+ },
+ {
+  "file": "luna-4.jpg",
+  "group": "Lucrarea lunii",
+  "label": "Galerie, poza 4"
+ },
+ {
+  "file": "despre-echipa.jpg",
+  "group": "Despre noi",
+  "label": "Poza de echipă"
+ },
+ {
+  "file": "echipa-horia.jpg",
+  "group": "Despre noi",
+  "label": "Horia"
+ },
+ {
+  "file": "echipa-daniel.jpg",
+  "group": "Despre noi",
+  "label": "Daniel"
+ },
+ {
+  "file": "care-hero.jpg",
+  "group": "Alte pagini",
+  "label": "ETA Care: poza de sus"
+ },
+ {
+  "file": "blog-abur-vs-spuma.jpg",
+  "group": "Blog",
+  "label": "Articol: abur sau spumă"
+ },
+ {
+  "file": "blog-piele-iarna.jpg",
+  "group": "Blog",
+  "label": "Articol: pielea iarna"
+ },
+ {
+  "file": "blog-cat-de-des.jpg",
+  "group": "Blog",
+  "label": "Articol: cât de des"
+ },
+ {
+  "file": "zona-hero.jpg",
+  "group": "Alte pagini",
+  "label": "Zone: poza de sus"
+ },
+ {
+  "file": "lucrare-lamborghini-aventador-cover.jpg",
+  "group": "Lucrare: Lamborghini Aventador",
+  "label": "Poza principală"
+ },
+ {
+  "file": "lucrare-lamborghini-aventador-inainte.jpg",
+  "group": "Lucrare: Lamborghini Aventador",
+  "label": "Înainte"
+ },
+ {
+  "file": "lucrare-lamborghini-aventador-dupa.jpg",
+  "group": "Lucrare: Lamborghini Aventador",
+  "label": "După"
+ },
+ {
+  "file": "lucrare-lamborghini-aventador-1.jpg",
+  "group": "Lucrare: Lamborghini Aventador",
+  "label": "Galerie, poza 1"
+ },
+ {
+  "file": "lucrare-lamborghini-aventador-2.jpg",
+  "group": "Lucrare: Lamborghini Aventador",
+  "label": "Galerie, poza 2"
+ },
+ {
+  "file": "lucrare-lamborghini-aventador-3.jpg",
+  "group": "Lucrare: Lamborghini Aventador",
+  "label": "Galerie, poza 3"
+ },
+ {
+  "file": "lucrare-bmw-seria-5-cover.jpg",
+  "group": "Lucrare: BMW Seria 5",
+  "label": "Poza principală"
+ },
+ {
+  "file": "lucrare-bmw-seria-5-inainte.jpg",
+  "group": "Lucrare: BMW Seria 5",
+  "label": "Înainte"
+ },
+ {
+  "file": "lucrare-bmw-seria-5-dupa.jpg",
+  "group": "Lucrare: BMW Seria 5",
+  "label": "După"
+ },
+ {
+  "file": "lucrare-bmw-seria-5-1.jpg",
+  "group": "Lucrare: BMW Seria 5",
+  "label": "Galerie, poza 1"
+ },
+ {
+  "file": "lucrare-bmw-seria-5-2.jpg",
+  "group": "Lucrare: BMW Seria 5",
+  "label": "Galerie, poza 2"
+ },
+ {
+  "file": "lucrare-bmw-seria-5-3.jpg",
+  "group": "Lucrare: BMW Seria 5",
+  "label": "Galerie, poza 3"
+ },
+ {
+  "file": "lucrare-mercedes-gle-cover.jpg",
+  "group": "Lucrare: Mercedes-Benz GLE",
+  "label": "Poza principală"
+ },
+ {
+  "file": "lucrare-mercedes-gle-inainte.jpg",
+  "group": "Lucrare: Mercedes-Benz GLE",
+  "label": "Înainte"
+ },
+ {
+  "file": "lucrare-mercedes-gle-dupa.jpg",
+  "group": "Lucrare: Mercedes-Benz GLE",
+  "label": "După"
+ },
+ {
+  "file": "lucrare-mercedes-gle-1.jpg",
+  "group": "Lucrare: Mercedes-Benz GLE",
+  "label": "Galerie, poza 1"
+ },
+ {
+  "file": "lucrare-mercedes-gle-2.jpg",
+  "group": "Lucrare: Mercedes-Benz GLE",
+  "label": "Galerie, poza 2"
+ },
+ {
+  "file": "lucrare-mercedes-gle-3.jpg",
+  "group": "Lucrare: Mercedes-Benz GLE",
+  "label": "Galerie, poza 3"
+ },
+ {
+  "file": "lucrare-audi-a6-cover.jpg",
+  "group": "Lucrare: Audi A6",
+  "label": "Poza principală"
+ },
+ {
+  "file": "lucrare-audi-a6-inainte.jpg",
+  "group": "Lucrare: Audi A6",
+  "label": "Înainte"
+ },
+ {
+  "file": "lucrare-audi-a6-dupa.jpg",
+  "group": "Lucrare: Audi A6",
+  "label": "După"
+ },
+ {
+  "file": "lucrare-audi-a6-1.jpg",
+  "group": "Lucrare: Audi A6",
+  "label": "Galerie, poza 1"
+ },
+ {
+  "file": "lucrare-audi-a6-2.jpg",
+  "group": "Lucrare: Audi A6",
+  "label": "Galerie, poza 2"
+ },
+ {
+  "file": "lucrare-audi-a6-3.jpg",
+  "group": "Lucrare: Audi A6",
+  "label": "Galerie, poza 3"
+ },
+ {
+  "file": "lucrare-volkswagen-golf-cover.jpg",
+  "group": "Lucrare: Volkswagen Golf",
+  "label": "Poza principală"
+ },
+ {
+  "file": "lucrare-volkswagen-golf-inainte.jpg",
+  "group": "Lucrare: Volkswagen Golf",
+  "label": "Înainte"
+ },
+ {
+  "file": "lucrare-volkswagen-golf-dupa.jpg",
+  "group": "Lucrare: Volkswagen Golf",
+  "label": "După"
+ },
+ {
+  "file": "lucrare-volkswagen-golf-1.jpg",
+  "group": "Lucrare: Volkswagen Golf",
+  "label": "Galerie, poza 1"
+ },
+ {
+  "file": "lucrare-volkswagen-golf-2.jpg",
+  "group": "Lucrare: Volkswagen Golf",
+  "label": "Galerie, poza 2"
+ },
+ {
+  "file": "lucrare-volkswagen-golf-3.jpg",
+  "group": "Lucrare: Volkswagen Golf",
+  "label": "Galerie, poza 3"
+ },
+ {
+  "file": "lucrare-porsche-cayenne-cover.jpg",
+  "group": "Lucrare: Porsche Cayenne",
+  "label": "Poza principală"
+ },
+ {
+  "file": "lucrare-porsche-cayenne-inainte.jpg",
+  "group": "Lucrare: Porsche Cayenne",
+  "label": "Înainte"
+ },
+ {
+  "file": "lucrare-porsche-cayenne-dupa.jpg",
+  "group": "Lucrare: Porsche Cayenne",
+  "label": "După"
+ },
+ {
+  "file": "lucrare-porsche-cayenne-1.jpg",
+  "group": "Lucrare: Porsche Cayenne",
+  "label": "Galerie, poza 1"
+ },
+ {
+  "file": "lucrare-porsche-cayenne-2.jpg",
+  "group": "Lucrare: Porsche Cayenne",
+  "label": "Galerie, poza 2"
+ },
+ {
+  "file": "lucrare-porsche-cayenne-3.jpg",
+  "group": "Lucrare: Porsche Cayenne",
+  "label": "Galerie, poza 3"
+ }
+]

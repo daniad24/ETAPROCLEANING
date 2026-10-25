@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin | ETA PRO CLEANING</title>
+<style>
+  :root { --bg:#0f1115; --card:#181b22; --line:#2a2f3a; --text:#eef0f4; --muted:#9aa3b2; --accent:#4cc3ff; --ok:#43c987; --err:#ff6b6b; }
+  @media (prefers-color-scheme: light) {
+    :root { --bg:#f4f6f9; --card:#fff; --line:#dfe3ea; --text:#14171c; --muted:#5b6575; --accent:#0a7cc4; --ok:#14804a; --err:#c0392b; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 1.25rem; margin: 0; }
+  h2 { font-size: 1rem; margin: 28px 0 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .bar { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0 8px; border-bottom:1px solid var(--line); }
+  .who { color:var(--muted); font-size:.9rem; }
+  button, .btn { font:inherit; cursor:pointer; border:1px solid var(--line); background:var(--card); color:var(--text); border-radius:10px; padding:10px 14px; min-height:44px; }
+  button.primary, .btn.primary { background:var(--accent); border-color:var(--accent); color:#04121c; font-weight:600; }
+  button:disabled { opacity:.6; cursor:default; }
+  input[type=text], input[type=password] { width:100%; font:inherit; padding:12px; border-radius:10px; border:1px solid var(--line); background:var(--card); color:var(--text); min-height:44px; }
+  label { display:block; font-size:.9rem; color:var(--muted); margin:14px 0 6px; }
+  .login { max-width: 360px; margin: 12vh auto 0; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px; }
+  .login h1 { margin-bottom: 4px; }
+  .err { color:var(--err); min-height:1.4em; margin:12px 0 0; font-size:.9rem; }
+  .row { display:flex; align-items:center; gap:14px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:10px; margin-bottom:8px; }
+  .row img { width:84px; height:62px; object-fit:cover; border-radius:8px; background:var(--line); flex:none; }
+  .row .t { flex:1; min-width:0; }
+  .row .n { font-weight:600; }
+  .row .f { color:var(--muted); font-size:.8rem; overflow-wrap:anywhere; }
+  .row .s { font-size:.85rem; margin-top:2px; }
+  .s.ok { color:var(--ok); } .s.err { color:var(--err); } .s.wait { color:var(--muted); }
+  .note { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; color:var(--muted); font-size:.9rem; margin-top:14px; }
+  input[type=file] { display:none; }
+  [hidden] { display:none !important; }
+  @media (max-width: 520px) { .row { flex-wrap: wrap; } .row .btn { width:100%; text-align:center; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <form class="login" id="login" hidden>
+    <h1>Admin ETA PRO CLEANING</h1>
+    <div class="who">Intră în cont</div>
+    <label for="u">Utilizator</label>
+    <input type="text" id="u" autocomplete="username" autocapitalize="none" required>
+    <label for="p">Parolă</label>
+    <input type="password" id="p" autocomplete="current-password" required>
+    <p class="err" id="loginErr" role="alert"></p>
+    <button class="primary" style="width:100%" id="loginBtn">Intră</button>
+  </form>
+
+  <div id="app" hidden>
+    <div class="bar">
+      <div><h1>Poze site</h1><div class="who" id="who"></div></div>
+      <button id="logout">Ieși</button>
+    </div>
+    <div class="note">Alege „Schimbă” lângă poza dorită. Poza se micșorează automat și apare pe site în 1–2 minute. Dacă o poză încă nu a fost încărcată, site-ul afișează una demo.</div>
+    <div id="list"></div>
+  </div>
+
+</div>
+<script src="../demo-images.js"></script>
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  var stamp = {}; // poze schimbate în această sesiune, ca previzualizarea să se actualizeze
+
+  function api(path, body) {
+    return fetch("/api/" + path, {
+      method: body ? "POST" : "GET",
+      headers: body ? { "Content-Type": "application/json" } : {},
+      credentials: "same-origin",
+      body: body ? JSON.stringify(body) : undefined,
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { j.status = r.status; return j; });
+    });
+  }
+
+  function show(loggedIn) { $("#login").hidden = loggedIn; $("#app").hidden = !loggedIn; }
+
+  function init() {
+    api("me").then(function (me) {
+      if (me.status !== 200) { show(false); return; }
+      show(true);
+      $("#who").textContent = me.user + " (" + (me.role === "owner" ? "administrator" : "editor") + ")";
+      render(me.slots || []);
+    }).catch(function () { show(false); $("#loginErr").textContent = "Nu mă pot conecta la server."; });
+  }
+
+  $("#login").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var btn = $("#loginBtn"); btn.disabled = true; $("#loginErr").textContent = "";
+    api("login", { user: $("#u").value, password: $("#p").value }).then(function (r) {
+      btn.disabled = false;
+      if (r.status === 200) { $("#p").value = ""; init(); }
+      else $("#loginErr").textContent = r.error || "Nu s-a putut intra.";
+    });
+  });
+
+  $("#logout").addEventListener("click", function () { api("logout", {}).then(function () { show(false); }); });
+
+  function thumbSrc(f) { return "../assets/img/" + f + (stamp[f] ? "?v=" + stamp[f] : ""); }
+
+  function render(slots) {
+    var list = $("#list"); list.innerHTML = "";
+    var group = null, order = [];
+    slots.forEach(function (s) { if (order.indexOf(s.group) < 0) order.push(s.group); });
+    slots = slots.slice().sort(function (a, b) { return order.indexOf(a.group) - order.indexOf(b.group); });
+    slots.forEach(function (s) {
+      if (s.group !== group) { group = s.group; var h = document.createElement("h2"); h.textContent = group; list.appendChild(h); }
+      var row = document.createElement("div"); row.className = "row";
+      var img = new Image(); img.alt = ""; img.loading = "lazy"; img.src = thumbSrc(s.file);
+      img.onerror = function () {
+        var demo = window.DEMO_IMAGES && window.DEMO_IMAGES[s.file];
+        if (demo && !img.dataset.d) { img.dataset.d = 1; img.src = demo.replace("w=1800", "w=300"); }
+      };
+      var t = document.createElement("div"); t.className = "t";
+      t.innerHTML = '<div class="n"></div><div class="f"></div><div class="s"></div>';
+      t.querySelector(".n").textContent = s.label;
+      t.querySelector(".f").textContent = s.file;
+      var status = t.querySelector(".s");
+      var input = document.createElement("input"); input.type = "file"; input.accept = s.file.endsWith(".png") ? "image/png" : "image/*";
+      var btn = document.createElement("button"); btn.className = "btn primary"; btn.textContent = "Schimbă";
+      btn.onclick = function () { input.click(); };
+      input.onchange = function () { if (input.files[0]) upload(s, input.files[0], img, status, btn); input.value = ""; };
+      row.append(img, t, btn, input);
+      list.appendChild(row);
+    });
+  }
+
+  function setStatus(el, cls, text) { el.className = "s " + cls; el.textContent = text; }
+
+  // micșorează poza (max. 2400 px) și o face JPG (sau PNG pentru pozele cu fundal transparent)
+  function shrink(file, asPng) {
+    return createImageBitmap(file, { imageOrientation: "from-image" }).then(function (bmp) {
+      var max = asPng ? 1600 : 2400, k = Math.min(1, max / Math.max(bmp.width, bmp.height));
+      var c = document.createElement("canvas"); c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+      c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+      var q = 0.86;
+      function go() {
+        return new Promise(function (res) { c.toBlob(res, asPng ? "image/png" : "image/jpeg", q); }).then(function (b) {
+          if (!b) throw new Error("Poza nu a putut fi citită.");
+          if (b.size > 2.9 * 1024 * 1024 && !asPng && q > 0.5) { q -= 0.12; return go(); }
+          if (b.size > 2.9 * 1024 * 1024) throw new Error("Poza e prea mare chiar și după micșorare.");
+          return b;
+        });
+      }
+      return go();
+    });
+  }
+
+  function toBase64(blob) {
+    return new Promise(function (res, rej) {
+      var r = new FileReader();
+      r.onload = function () { res(String(r.result).split(",")[1]); };
+      r.onerror = rej;
+      r.readAsDataURL(blob);
+    });
+  }
+
+  function upload(slot, file, img, status, btn) {
+    btn.disabled = true; setStatus(status, "wait", "Pregătesc poza…");
+    shrink(file, slot.file.endsWith(".png")).then(function (blob) {
+      setStatus(status, "wait", "Se încarcă (" + Math.round(blob.size / 1024) + " KB)…");
+      return toBase64(blob).then(function (data) { return api("upload", { file: slot.file, data: data }); }).then(function (r) {
+        if (r.status !== 200) throw new Error(r.error || "Nu s-a putut salva.");
+        stamp[slot.file] = Date.now();
+        img.dataset.d = 1; img.src = URL.createObjectURL(blob);
+        setStatus(status, "ok", "Salvat. Apare pe site în 1–2 minute.");
+      });
+    }).catch(function (e) { setStatus(status, "err", e.message || "Eroare."); })
+      .then(function () { btn.disabled = false; });
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>

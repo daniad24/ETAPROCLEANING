@@ -1176,6 +1176,51 @@ window.__img = function (img) {{
 }};
 '''
 
+# Lista pozelor editabile din /admin (și lista permisă pentru încărcare, în api/_slots.json).
+_BA = {"scaune": "Scaune textile", "mocheta": "Mochetă", "motor": "Motor", "plafon": "Plafon", "piele": "Piele"}
+_FIX = {
+    "vito.jpg": ("Pagina principală", "Duba Vito echipată"),
+    "fortador-pro-max.png": ("Pagina principală", "Aparatul Fortador (fundal transparent, PNG)"),
+    "cinematic-murdar.jpg": ("Pagina principală", "Animația cu abur: murdar"),
+    "cinematic-curat.jpg": ("Pagina principală", "Animația cu abur: curat"),
+    "andy-popescu.jpg": ("Pagina principală", "Andy Popescu: fundal"),
+    "andy-inainte.jpg": ("Pagina principală", "Andy Popescu: înainte"),
+    "andy-dupa.jpg": ("Pagina principală", "Andy Popescu: după"),
+    "luna-inainte.jpg": ("Lucrarea lunii", "Înainte"),
+    "luna-dupa.jpg": ("Lucrarea lunii", "După"),
+    "despre-echipa.jpg": ("Despre noi", "Poza de echipă"),
+    "echipa-horia.jpg": ("Despre noi", "Horia"),
+    "echipa-daniel.jpg": ("Despre noi", "Daniel"),
+    "care-hero.jpg": ("Alte pagini", "ETA Care: poza de sus"),
+    "zona-hero.jpg": ("Alte pagini", "Zone: poza de sus"),
+    "blog-abur-vs-spuma.jpg": ("Blog", "Articol: abur sau spumă"),
+    "blog-piele-iarna.jpg": ("Blog", "Articol: pielea iarna"),
+    "blog-cat-de-des.jpg": ("Blog", "Articol: cât de des"),
+}
+
+def slots():
+    out = []
+    for f in DEMO:
+        if f in _FIX:
+            g, l = _FIX[f]
+        elif f.startswith("ba-"):
+            _, k, side = f[:-4].split("-")
+            g, l = "Înainte / după (pagina principală)", f"{_BA[k]}: {'înainte' if side == 'inainte' else 'după'}"
+        elif f.startswith("luna-"):
+            g, l = "Lucrarea lunii", f"Galerie, poza {f[5:-4]}"
+        elif f.startswith("lucrare-"):
+            w = next(x for x in LUCRARI if f.startswith(f"lucrare-{x['slug']}-"))
+            part = f[len("lucrare-" + w["slug"]) + 1:-4]
+            l = {"cover": "poza principală", "inainte": "înainte", "dupa": "după"}.get(part, f"galerie, poza {part}")
+            g, l = f"Lucrare: {w['marca']} {w['model']}", l[0].upper() + l[1:]
+        else:
+            g, l = "Alte poze", f
+        out.append({"file": f, "group": g, "label": l})
+    return out
+
+def slots_json():
+    return json.dumps(slots(), ensure_ascii=False, indent=1) + "\n"
+
 def main():
     out = [
         write("demo-images.js", demo_js()),
@@ -1199,7 +1244,10 @@ def main():
     urls = ["index.html"] + [o for o in out if o.endswith(".html")]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
           "".join(f"  <url><loc>{BASE_URL}/{u}</loc></url>\n" for u in urls) + "</urlset>\n")
-    write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n")
+    api = SITE.parent / "api"
+    api.mkdir(exist_ok=True)
+    (api / "_slots.json").write_text(slots_json(), encoding="utf-8")
+    write("robots.txt", f"User-agent: *\nAllow: /\nDisallow: /admin/\nSitemap: {BASE_URL}/sitemap.xml\n")
     print(f"{len(out)} fișiere generate în {SITE}")
 
 if __name__ == "__main__":
