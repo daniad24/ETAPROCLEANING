@@ -45,9 +45,10 @@
     <h1>Admin ETA PRO CLEANING</h1>
     <div class="who">Intră în cont</div>
     <label for="u">Utilizator</label>
-    <input type="text" id="u" autocomplete="username" autocapitalize="none" required>
+    <input type="text" id="u" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required>
     <label for="p">Parolă</label>
-    <input type="password" id="p" autocomplete="current-password" required>
+    <input type="password" id="p" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false" required>
+    <label style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="checkbox" id="showPw" style="width:auto"> Arată parola</label>
     <p class="err" id="loginErr" role="alert"></p>
     <button class="primary" style="width:100%" id="loginBtn">Intră</button>
   </form>
@@ -99,6 +100,8 @@
       else $("#loginErr").textContent = r.error || "Nu s-a putut intra.";
     });
   });
+
+  $("#showPw").addEventListener("change", function () { $("#p").type = this.checked ? "text" : "password"; });
 
   $("#logout").addEventListener("click", function () { api("logout", {}).then(function () { show(false); }); });
 
